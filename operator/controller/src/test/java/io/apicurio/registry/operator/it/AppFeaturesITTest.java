@@ -12,9 +12,12 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Map;
+
 import static io.apicurio.registry.operator.Tags.SMOKE;
 import static io.apicurio.registry.operator.api.v1.ContainerNames.REGISTRY_APP_CONTAINER_NAME;
 import static io.apicurio.registry.operator.resource.app.AppDeploymentResource.getContainerFromDeployment;
+import static io.apicurio.registry.operator.utils.Mapper.toYAML;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 
@@ -89,12 +92,13 @@ public class AppFeaturesITTest extends ITBase {
                     .inNamespace(namespace)
                     .withName(registry.getMetadata().getName())
                     .get();
-            log.warn(">>>>> Registry:\n\n{}\n\n", r);
+            log.warn(">>>>> Registry:\n\n{}\n\n", toYAML(r));
             client.pods()
                     .inNamespace(namespace)
                     .withLabels(Labels.getSelectorLabels(r, ResourceFactory.COMPONENT_APP))
                     .list().getItems().forEach(p -> {
-                        log.warn(">>>>> Pod:\n\n{}\n\n", p);
+                        p.getMetadata().setAnnotations(Map.of());
+                        log.warn(">>>>> Pod:\n\n{}\n\n", toYAML(p));
                     });
             // ==================
 
