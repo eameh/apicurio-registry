@@ -3,18 +3,26 @@ package io.apicurio.registry.operator.it;
 import io.apicurio.registry.operator.EnvironmentVariables;
 import io.apicurio.registry.operator.api.v1.ApicurioRegistry3;
 import io.apicurio.registry.operator.api.v1.spec.AppFeaturesSpec;
+import io.apicurio.registry.operator.resource.Labels;
 import io.apicurio.registry.operator.resource.ResourceFactory;
 import io.fabric8.kubernetes.api.model.EnvVar;
 import io.quarkus.test.junit.QuarkusTest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import static io.apicurio.registry.operator.Tags.SMOKE;
 import static io.apicurio.registry.operator.api.v1.ContainerNames.REGISTRY_APP_CONTAINER_NAME;
 import static io.apicurio.registry.operator.resource.app.AppDeploymentResource.getContainerFromDeployment;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 
 @QuarkusTest
+@Tag(SMOKE)
 public class AppFeaturesITTest extends ITBase {
+
+    private static final Logger log = LoggerFactory.getLogger(AppFeaturesITTest.class);
 
     @Test
     void testAllowDeletesTrue() {
@@ -75,6 +83,21 @@ public class AppFeaturesITTest extends ITBase {
 
         // Check that the mutability ENV var is set with value "true"
         await().untilAsserted(() -> {
+
+            // Debug: ===========
+            var r = client.resources(ApicurioRegistry3.class)
+                    .inNamespace(namespace)
+                    .withName(registry.getMetadata().getName())
+                    .get();
+            log.warn(">>>>> Registry:\n\n{}\n\n", r);
+            client.pods()
+                    .inNamespace(namespace)
+                    .withLabels(Labels.getSelectorLabels(r, ResourceFactory.COMPONENT_APP))
+                    .list().getItems().forEach(p -> {
+                        log.warn(">>>>> Pod:\n\n{}\n\n", p);
+                    });
+            // ==================
+
             var appEnv = getContainerFromDeployment(
                     client.apps().deployments().inNamespace(namespace)
                             .withName(registry.getMetadata().getName() + "-app-deployment").get(),
