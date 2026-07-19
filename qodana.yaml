@@ -10,7 +10,6 @@ exclude:
       - .trash~
   - name: Annotator
     paths:
-      - docs/getting-started/master-docinfo.xml
       - integration-tests/src/test/resources/META-INF/services/org.junit.platform.launcher.TestExecutionListener
   - name: OptionalUsedAsFieldOrParameterType
 #- name: Proofreading

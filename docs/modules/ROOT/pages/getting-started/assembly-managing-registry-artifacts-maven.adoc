@@ -104,7 +104,7 @@ For OpenAPI and AsyncAPI artifacts, you can set `versionStrategy` to `API_INFO_V
 * When the API document later uses the same version without the `-SNAPSHOT` suffix, the Maven plug-in updates the existing draft content and promotes that version to `ENABLED`.
 * For other artifact types, `API_INFO_VERSION` is ignored.
 
-To update draft content or promote a draft created in this way, artifact version mutability must be enabled on the server. For more details, see xref:assembly-deploying-registry-operator.adoc#configuring-registry-operator_{context}[Enabling artifact version mutability].
+To update draft content or promote a draft created in this way, artifact version mutability must be enabled on the server. For more details, see xref:getting-started/assembly-deploying-registry-operator.adoc#enabling-version-mutability_{context}[Enabling artifact version mutability].
 
 For list properties, use an additional numeric index. The following formats are supported:
 

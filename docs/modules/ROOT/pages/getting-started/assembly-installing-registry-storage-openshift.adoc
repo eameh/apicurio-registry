@@ -25,7 +25,6 @@ Install and configure your chosen registry storage option:
 * {installing-the-registry-openshift}
 
 //INCLUDES
-//include::{mod-loc}getting-started/proc_installing-registry-kafka-streams-template-storage.adoc[leveloffset=+1]
 
 
 // Metadata created by nebel
