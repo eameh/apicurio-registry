@@ -1,0 +1,84 @@
+[?2004hapicurio-test$ [Kapicurio-test$ date -u
+[?2004lTue Oct 13 08:01:02 UTC 2026
+[?2004hapicurio-test$ acr version
+[?2004lField             Value
+---------------   -------------------------------------------------------------------------------------------------------------------------------------------
+CLI version       3.4.0-SNAPSHOT
+Server name       Apicurio Registry (SQL)
+Server version    3.4.0-SNAPSHOT
+Server built on   2026-10-13T07:30:22
+Artifact types    PROTOBUF, OPENAPI, ASYNCAPI, JSON, AVRO, GRAPHQL, KCONNECT, WSDL, XSD, XML, AGENT_CARD, MCP_TOOL, MCP_SERVER, ICEBERG_TABLE, ICEBERG_VIEW,
+                  OPENRPC, MODEL_SCHEMA, PROMPT_TEMPLATE, ODCS_CONTRACT, THRIFT
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+[?2004hapicurio-test$ acr artifact --interactive --size 2
+[?2004l[?1049h[22;0;0t[?1h=[H[2J> client-alpha  AVRO  2026-10-13T08:55:35
+  client-beta  AVRO  2026-10-13T08:55:35
+
+[Enter: view, d: delete, /: filter loaded rows, q/Esc: exit]  [PgUp/PgDn: page 1]
+[H[2J> client-alpha  AVRO  2026-10-13T08:55:35
+  client-beta  AVRO  2026-10-13T08:55:35
+
+Filter (loaded rows): _  [Enter: apply, Esc: clear]
+[H[2J> client-alpha  AVRO  2026-10-13T08:55:35
+  client-beta  AVRO  2026-10-13T08:55:35
+
+Filter (loaded rows): c_  [Enter: apply, Esc: clear]
+[H[2J> client-alpha  AVRO  2026-10-13T08:55:35
+  client-beta  AVRO  2026-10-13T08:55:35
+
+Filter (loaded rows): cl_  [Enter: apply, Esc: clear]
+[H[2J> client-alpha  AVRO  2026-10-13T08:55:35
+  client-beta  AVRO  2026-10-13T08:55:35
+
+Filter (loaded rows): cli_  [Enter: apply, Esc: clear]
+[H[2J> client-alpha  AVRO  2026-10-13T08:55:35
+  client-beta  AVRO  2026-10-13T08:55:35
+
+Filter (loaded rows): clie_  [Enter: apply, Esc: clear]
+[H[2J> client-alpha  AVRO  2026-10-13T08:55:35
+  client-beta  AVRO  2026-10-13T08:55:35
+
+Filter (loaded rows): clien_  [Enter: apply, Esc: clear]
+[H[2J> client-alpha  AVRO  2026-10-13T08:55:35
+  client-beta  AVRO  2026-10-13T08:55:35
+
+Filter (loaded rows): client_  [Enter: apply, Esc: clear]
+[H[2J> client-alpha  AVRO  2026-10-13T08:55:35
+  client-beta  AVRO  2026-10-13T08:55:35
+
+Filter (loaded rows): client-_  [Enter: apply, Esc: clear]
+[H[2J(no matching rows)
+
+Filter (loaded rows): client-g_  [Enter: apply, Esc: clear]
+[H[2J(no matching rows)
+
+Filter (loaded rows): client-ga_  [Enter: apply, Esc: clear]
+[H[2J(no matching rows)
+
+Filter (loaded rows): client-gam_  [Enter: apply, Esc: clear]
+[H[2J(no matching rows)
+
+Filter (loaded rows): client-gamm_  [Enter: apply, Esc: clear]
+[H[2J(no matching rows)
+
+Filter (loaded rows): client-gamma_  [Enter: apply, Esc: clear]
+[H[2J(no matching rows)
+
+[Enter: view, d: delete, /: filter loaded rows, q/Esc: exit]  [PgUp/PgDn: page 1]  [Filter: client-gamma - / to edit, then Esc to clear]
+[H[2J> client-gamma  AVRO  2026-10-13T08:55:35
+
+[Enter: view, d: delete, /: filter loaded rows, q/Esc: exit]  [PgUp/PgDn: page 2]  [Filter: client-gamma - / to edit, then Esc to clear]
+[?1l>[?1049l[23;0;0tField           Value
+-------------   -------------------
+Group ID        client-cli-live
+Artifact ID     client-gamma
+Name            client-gamma
+Artifact Type   AVRO
+Description
+Created On      2026-10-13T08:55:35
+Owner
+Modified On     2026-10-13T08:55:35
+Modified By
+Labels
+-----------------------------------
+[?2004hapicurio-test$ 

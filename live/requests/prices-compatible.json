@@ -1,0 +1,7 @@
+{
+  "version": "3",
+  "content": {
+    "content": "{\"type\": \"record\", \"name\": \"Price\", \"fields\": [{\"name\": \"symbol\", \"type\": \"string\"}, {\"name\": \"price\", \"type\": \"string\"}, {\"name\": \"currency\", \"type\": \"string\", \"default\": \"USD\"}]}",
+    "contentType": "application/json"
+  }
+}

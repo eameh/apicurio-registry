@@ -1,0 +1,11 @@
+{
+  "artifactId": "prices",
+  "artifactType": "AVRO",
+  "firstVersion": {
+    "version": "1",
+    "content": {
+      "content": "{\"type\": \"record\", \"name\": \"Price\", \"fields\": [{\"name\": \"symbol\", \"type\": \"string\"}, {\"name\": \"price\", \"type\": \"string\"}]}",
+      "contentType": "application/json"
+    }
+  }
+}

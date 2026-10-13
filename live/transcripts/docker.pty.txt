@@ -1,0 +1,19 @@
+[?2004hapicurio-test$ [Kapicurio-test$ date -u
+[?2004lTue Oct 13 08:00:40 UTC 2026
+[?2004hapicurio-test$ curl -sS "$API_URL/system/info" | jq
+[?2004l{
+  "name": "Apicurio Registry (SQL)",
+  "description": "High performance, runtime registry for schemas and API designs.",
+  "version": "3.4.0-SNAPSHOT",
+  "builtOn": "2026-10-13T06:30:22Z"
+}
+[?2004hapicurio-test$ curl -sS -w '\nHTTP %{http_code}\n' -X POST -H "Content-type: application/json; artifactType=AVRO" -H "X-Registry-ArtifactId: share-price" --d ata '{"type":"record","name":"price","namespace":"com.example","fields":[{"name":"symbol","type":"string"},{"name":"price","type":"string"}]}' http://127.0.0 .1:19090/apis/registry/v3/groups/my-group/artifacts
+[?2004l{"detail":"MissingRequiredParameterException: Request is missing a required parameter: body.artifactType","title":"Request is missing a required parameter: body.artifactType","status":400,"name":"MissingRequiredParameterException"}
+HTTP 400
+[?2004hapicurio-test$ curl -sS -w '\nHTTP %{http_code}\n' -H "Content-Type: application/json" --data @fixtures/h2-corrected.json "$API_URL/groups/my-group/artifacts "
+[?2004l{"artifact":{"name":"Share Price","owner":"","createdOn":"2026-10-13T08:00:44Z","modifiedBy":"","modifiedOn":"2026-10-13T08:00:44Z","artifactType":"AVRO","labels":{"environment":"DEV","category":"finance"},"groupId":"my-group","artifactId":"share-price"},"version":{"version":"1.0.0","owner":"","createdOn":"2026-10-13T08:00:44Z","artifactType":"AVRO","globalId":4,"state":"ENABLED","groupId":"my-group","contentId":4,"artifactId":"share-price","modifiedBy":"","modifiedOn":"2026-10-13T08:00:44Z"}}
+HTTP 200
+[?2004hapicurio-test$ curl -sS -w '\nHTTP %{http_code}\n' "$API_URL/groups/my-group/artifacts/share-price/versions/1.0.0/content"
+[?2004l{"type":"record","name":"price","namespace":"com.example","fields":[{"name":"symbol","type":"string"},{"name":"price","type":"string"}]}
+HTTP 200
+[?2004hapicurio-test$ 

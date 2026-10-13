@@ -1,0 +1,37 @@
+[?2004hapicurio-test$ [Kapicurio-test$ date -u
+[?2004lTue Oct 13 08:03:08 UTC 2026
+[?2004hapicurio-test$ podman inspect --format '{{range .Config.Env}}{{println .}}{{end}}' docs-live-http-corrected | rg 'QUARKUS_OTEL_(SDK|EXPORTER)'
+[?2004lQUARKUS_OTEL_EXPORTER_OTLP_ENDPOINT=http://docs-live-http-corrected-collector:4318
+QUARKUS_OTEL_SDK_DISABLED=false
+QUARKUS_OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+[?2004hapicurio-test$ curl -sS -w '
+[?2004l[?2004h> HTTP %{http_code}
+[?2004l[?2004h> ' http://127.0.0.1:19085/apis/registry/v3/search/artifacts
+[?2004l{"artifacts":[],"count":0}
+HTTP 200
+[?2004hapicurio-test$ sleep 6
+[?2004l[?2004hapicurio-test$ podman logs --since 15s docs-live-http-corrected-collector 2>&1 | rg -B 4 -A 18 -m 1 'Name\s+: GET /apis/registry/v3/search/artifacts'
+[?2004lSpan #0
+    Trace ID       : a6f07e38851fa5e85e5319f04b62d7b2
+    Parent ID      : 
+    ID             : ba1ab9d7151f1c2f
+    Name           : GET /apis/registry/v3/search/artifacts
+    Kind           : Server
+    Start time     : 2026-10-13 08:03:11.090551972 +0000 UTC
+    End time       : 2026-10-13 08:03:11.101866229 +0000 UTC
+    Status code    : Unset
+    Status message : 
+Attributes:
+     -> http.route: Str(/apis/registry/v3/search/artifacts)
+     -> http.response.body.size: Int(26)
+     -> http.request.method: Str(GET)
+     -> url.path: Str(/apis/registry/v3/search/artifacts)
+     -> server.address: Str(127.0.0.1)
+     -> client.address: Str(10.89.0.8)
+     -> user_agent.original: Str(curl/8.18.0)
+     -> url.scheme: Str(http)
+     -> server.port: Int(19085)
+     -> apicurio.registry.request.path: Str(/apis/registry/v3/search/artifacts)
+     -> code.function.name: Str(io.apicurio.registry.rest.v3.SearchResource.searchArtifacts)
+     -> http.response.status_code: Int(200)
+[?2004hapicurio-test$ 

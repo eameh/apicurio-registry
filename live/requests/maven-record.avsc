@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "name": "ClientRecord",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    }
+  ]
+}

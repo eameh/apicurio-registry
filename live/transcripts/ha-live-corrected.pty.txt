@@ -1,0 +1,20 @@
+[?2004hapicurio-test$ [Kapicurio-test$ date -u
+[?2004lTue Oct 13 08:02:52 UTC 2026
+[?2004hapicurio-test$ curl -sS http://127.0.0.1:19083/apis/registry/v3/system/info | jq
+[?2004l{
+  "name": "Apicurio Registry (SQL)",
+  "description": "High performance, runtime registry for schemas and API designs.",
+  "version": "3.3.3",
+  "builtOn": "2026-09-08T15:19:44Z"
+}
+[?2004hapicurio-test$ podman inspect --format '{{range .Config.Env}}{{println .}}{{end}}' docs-live-ha-corrected | rg 'DATASOURCE.*JDBC'
+[?2004lAPICURIO_DATASOURCE_JDBC_MAX-SIZE=50
+QUARKUS_DATASOURCE_POSTGRESQL_JDBC_BACKGROUND_VALIDATION_INTERVAL=3M
+QUARKUS_DATASOURCE_POSTGRESQL_JDBC_FOREGROUND_VALIDATION_INTERVAL=1M
+APICURIO_DATASOURCE_JDBC_INITIAL-SIZE=10
+QUARKUS_DATASOURCE_POSTGRESQL_JDBC_MAX_LIFETIME=30M
+APICURIO_DATASOURCE_JDBC_MIN-SIZE=10
+QUARKUS_DATASOURCE_POSTGRESQL_JDBC_ACQUISITION_TIMEOUT=7S
+[?2004hapicurio-test$ podman logs docs-live-ha-corrected 2>&1 | rg DOCS_GAP_POOL_PROBE
+[?2004lDOCS_GAP_POOL_PROBE datasource=postgresql initialSize=10 minSize=10 maxSize=50 acquisitionTimeout=PT7S validationTimeout=PT3M idleValidationTimeout=PT1M maxLifetime=PT30M
+[?2004hapicurio-test$ 

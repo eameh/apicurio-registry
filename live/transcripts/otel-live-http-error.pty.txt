@@ -1,0 +1,22 @@
+[?2004hapicurio-test$ [Kapicurio-test$ date -u
+[?2004lTue Oct 13 08:02:56 UTC 2026
+[?2004hapicurio-test$ curl -sS http://127.0.0.1:19084/apis/registry/v3/system/info | jq
+[?2004l{
+  "name": "Apicurio Registry (SQL)",
+  "description": "High performance, runtime registry for schemas and API designs.",
+  "version": "3.3.3",
+  "builtOn": "2026-09-08T15:19:44Z"
+}
+[?2004hapicurio-test$ podman inspect --format '{{range .Config.Env}}{{println .}}{{end}}' docs-live-http-as-written | rg 'QUARKUS_OTEL_(SDK|EXPORTER)'
+[?2004lQUARKUS_OTEL_EXPORTER_OTLP_ENDPOINT=http://docs-live-http-as-written-collector:4318
+QUARKUS_OTEL_SDK_DISABLED=false
+[?2004hapicurio-test$ curl -sS -w '
+[?2004l[?2004h> HTTP %{http_code}
+[?2004l[?2004h> ' http://127.0.0.1:19084/apis/registry/v3/search/artifacts
+[?2004l{"artifacts":[],"count":0}
+HTTP 200
+[?2004hapicurio-test$ sleep 6
+[?2004l[?2004hapicurio-test$ podman logs --since 15s docs-live-http-as-written 2>&1 | rg -m 2 'SETTINGS|Failed to export'
+[?2004l2026-10+00-13 08:02:51 ERROR [null] (vert.x-eventloop-thread-3) First received frame was not SETTINGS. Hex dump for first 5 bytes: 485454502f
+2026-10+00-13 08:02:51 ERROR [null] (vert.x-eventloop-thread-3) First received frame was not SETTINGS. Hex dump for first 5 bytes: 485454502f
+[?2004hapicurio-test$ 

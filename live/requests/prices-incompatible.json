@@ -1,0 +1,7 @@
+{
+  "version": "2",
+  "content": {
+    "content": "{\"type\": \"record\", \"name\": \"Price\", \"fields\": [{\"name\": \"symbol\", \"type\": \"string\"}, {\"name\": \"price\", \"type\": \"int\"}]}",
+    "contentType": "application/json"
+  }
+}

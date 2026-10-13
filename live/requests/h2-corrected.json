@@ -1,0 +1,16 @@
+{
+  "artifactId": "share-price",
+  "artifactType": "AVRO",
+  "name": "Share Price",
+  "labels": {
+    "environment": "DEV",
+    "category": "finance"
+  },
+  "firstVersion": {
+    "version": "1.0.0",
+    "content": {
+      "content": "{\"type\":\"record\",\"name\":\"price\",\"namespace\":\"com.example\",\"fields\":[{\"name\":\"symbol\",\"type\":\"string\"},{\"name\":\"price\",\"type\":\"string\"}]}",
+      "contentType": "application/json"
+    }
+  }
+}

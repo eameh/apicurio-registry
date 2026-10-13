@@ -1,0 +1,109 @@
+[?2004hapicurio-test$ [Kapicurio-test$ date -u
+[?2004lTue Oct 13 08:03:02 UTC 2026
+[?2004hapicurio-test$ cd client/maven-work
+[?2004l[?2004hapicurio-test$ ls -la
+[?2004ltotal 4
+drwxr-xr-x. 1 eameh eameh  22 Oct 13 08:55 .
+drwxr-xr-x. 1 eameh eameh 140 Oct 13 08:58 ..
+-rw-r--r--. 1 eameh eameh 125 Oct 13 08:55 record.avsc
+[?2004hapicurio-test$ cat record.avsc
+[?2004l{
+  "type": "record",
+  "name": "ClientRecord",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    }
+  ]
+}
+[?2004hapicurio-test$ export APICURIO_VERSION=3.4.0-SNAPSHOT
+[?2004l[?2004hapicurio-test$ mvn -B -ntp io.apicurio:apicurio-registry-maven-plugin:${apicurio.version}:register \
+[?2004l[?2004h>   -Dapicurio.url=http://127.0.0.1:19090/apis/registry/v3 \
+[?2004l[?2004h>   -Dartifacts.groupId=client-maven-live \
+[?2004l[?2004h>   -Dartifacts.artifactId=FullNameRecordLive -Dartifacts.artifactType=AVRO \
+[?2004l[?2004h>   -Dartifacts.file=./record.avsc -Dartifacts.ifExists=FAIL
+[?2004lbash: io.apicurio:apicurio-registry-maven-plugin:${apicurio.version}:register: bad substitution
+[?2004hapicurio-test$ clear
+[?2004l[H[2J[3J[?2004hapicurio-test$ mvn -B -ntp io.apicurio:apicurio-registry-maven-plugin:${APICURIO_VERSION}:register \
+[?2004l[?2004h>   -Dapicurio.url=http://127.0.0.1:19090/apis/registry/v3 \
+[?2004l[?2004h>   -Dartifacts.groupId=client-maven-live \
+[?2004l[?2004h>   -Dartifacts.artifactId=FullNameRecordLive -Dartifacts.artifactType=AVRO \
+[?2004l[?2004h>   -Dartifacts.file=./record.avsc -Dartifacts.ifExists=FAIL
+[?2004l[0m[0mWARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by com.google.inject.internal.aop.HiddenClassDefiner (file:/usr/share/maven/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] Scalpel 0.4.2 is disabled
+[INFO] 
+[INFO] Using the MultiThreadedBuilder implementation with a thread count of 14
+[INFO] 
+[INFO] ------------------< org.apache.maven:standalone-pom >-------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- apicurio-registry:3.4.0-SNAPSHOT:register (default-cli) @ standalone-pom ---
+[INFO] Loaded artifact configuration from system properties (artifacts.<index>.<field>).
+[INFO] Creating registry client without authentication.
+[INFO] Successfully registered artifact [client-maven-live] / [FullNameRecordLive].  GlobalId is [12]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.700 s (Wall Clock)
+[INFO] Finished at: 2026-10-13T09:03:17+01:00
+[INFO] ------------------------------------------------------------------------
+[0m[0m[ERROR] Unhandled exception
+java.lang.NoClassDefFoundError: io/vertx/core/impl/future/CompositeFutureImpl
+    at io.vertx.core.Future.join (Future.java:183)
+    at io.vertx.core.eventbus.impl.EventBusImpl.unregisterAll (EventBusImpl.java:472)
+    at io.vertx.core.eventbus.impl.EventBusImpl.close (EventBusImpl.java:251)
+    at io.vertx.core.impl.VertxImpl.lambda$null$13 (VertxImpl.java:785)
+    at io.vertx.core.impl.ContextInternal.dispatch (ContextInternal.java:270)
+    at io.vertx.core.impl.ContextInternal.dispatch (ContextInternal.java:252)
+    at io.vertx.core.impl.ContextInternal.lambda$runOnContext$0 (ContextInternal.java:50)
+    at io.netty.util.concurrent.AbstractEventExecutor.runTask (AbstractEventExecutor.java:173)
+    at io.netty.util.concurrent.AbstractEventExecutor.safeExecute (AbstractEventExecutor.java:166)
+    at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks (SingleThreadEventExecutor.java:472)
+    at io.netty.channel.nio.NioEventLoop.run (NioEventLoop.java:569)
+    at io.netty.util.concurrent.SingleThreadEventExecutor$4.run (SingleThreadEventExecutor.java:1007)
+    at io.netty.util.internal.ThreadExecutorMap$2.run (ThreadExecutorMap.java:74)
+    at io.netty.util.concurrent.FastThreadLocalRunnable.run (FastThreadLocalRunnable.java:30)
+    at java.lang.Thread.run (Thread.java:1474)
+Caused by: java.lang.ClassNotFoundException: io.vertx.core.impl.future.CompositeFutureImpl
+    at org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy.loadClass (SelfFirstStrategy.java:42)
+    at org.codehaus.plexus.classworlds.realm.ClassRealm.unsynchronizedLoadClass (ClassRealm.java:225)
+    at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass (ClassRealm.java:210)
+    at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass (ClassRealm.java:205)
+    at io.vertx.core.Future.join (Future.java:183)
+    at io.vertx.core.eventbus.impl.EventBusImpl.unregisterAll (EventBusImpl.java:472)
+    at io.vertx.core.eventbus.impl.EventBusImpl.close (EventBusImpl.java:251)
+    at io.vertx.core.impl.VertxImpl.lambda$null$13 (VertxImpl.java:785)
+    at io.vertx.core.impl.ContextInternal.dispatch (ContextInternal.java:270)
+    at io.vertx.core.impl.ContextInternal.dispatch (ContextInternal.java:252)
+    at io.vertx.core.impl.ContextInternal.lambda$runOnContext$0 (ContextInternal.java:50)
+    at io.netty.util.concurrent.AbstractEventExecutor.runTask (AbstractEventExecutor.java:173)
+    at io.netty.util.concurrent.AbstractEventExecutor.safeExecute (AbstractEventExecutor.java:166)
+    at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks (SingleThreadEventExecutor.java:472)[?2004hapicurio-test$ curl -sS -i "$API_URL/groups/client-maven-live/artifacts/FullNameRecordLive/versions/1/content"
+[?2004lHTTP/1.1 200 OK
+[1mStrict-Transport-Security[0m: max-age=31536000; includeSubDomains
+[1mX-Content-Type-Options[0m: nosniff
+[1mDate[0m: Tue, 13 Oct 2026 08:03:19 GMT
+[1mExpires[0m: Mon, 12 Oct 2026 08:03:19 GMT
+[1mPragma[0m: no-cache
+[1mCache-control[0m: no-cache, no-store, must-revalidate
+[1mContent-Disposition[0m: attachment; filename="FullNameRecordLive.json"
+[1mContent-Type[0m: application/json
+[1mContent-Length[0m: 125
+
+{
+  "type": "record",
+  "name": "ClientRecord",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    }
+  ]
+}
+[?2004hapicurio-test$ 

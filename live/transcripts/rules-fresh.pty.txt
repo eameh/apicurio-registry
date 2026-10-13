@@ -1,0 +1,26 @@
+[?2004hapicurio-test$ [Kapicurio-test$ date -u
+[?2004lTue Oct 13 08:02:22 UTC 2026
+[?2004hapicurio-test$ curl -sS -w '\nHTTP %{http_code}\n' -H "Content-Type: application/json" --data @fixtures/prices-v1.json "$API_URL/groups/live-rule-inheritance -capture2/artifacts"
+[?2004l{"artifact":{"owner":"","createdOn":"2026-10-13T08:02:24Z","modifiedBy":"","modifiedOn":"2026-10-13T08:02:24Z","artifactType":"AVRO","groupId":"live-rule-inheritance-capture2","artifactId":"prices"},"version":{"version":"1","owner":"","createdOn":"2026-10-13T08:02:24Z","artifactType":"AVRO","globalId":9,"state":"ENABLED","groupId":"live-rule-inheritance-capture2","contentId":5,"artifactId":"prices","modifiedBy":"","modifiedOn":"2026-10-13T08:02:24Z"}}
+HTTP 200
+[?2004hapicurio-test$ curl -sS -w '\nHTTP %{http_code}\n' -H "Content-Type: application/json" --data @fixtures/group-backward.json "$API_URL/groups/live-rule-inheri tance-capture2/rules"
+[?2004l
+HTTP 204
+[?2004hapicurio-test$ curl -sS -w '\nHTTP %{http_code}\n' -H "Content-Type: application/json" --data @fixtures/artifact-validity.json "$API_URL/groups/live-rule-inh eritance-capture2/artifacts/prices/rules"
+[?2004l
+HTTP 204
+[?2004hapicurio-test$ curl -sS "$API_URL/groups/live-rule-inheritance-capture2/rules"
+[?2004l["COMPATIBILITY"][?2004hapicurio-test$ curl -sS "$API_URL/groups/live-rule-inheritance-capture2/artifacts/prices/rules"
+[?2004l["VALIDITY"][?2004hapicurio-test$ curl -sS -w '\nHTTP %{http_code}\n' -H "Content-Type: application/json" --data @fixtures/prices-incompatible.json "$API_URL/groups/live-rule-i nheritance-capture2/artifacts/prices/versions"
+[?2004l{"causes":[{"description":"reader type: INT not compatible with writer type: STRING","context":"/fields/1/type"}],"detail":"Incompatible artifact: prices [AVRO], num of incompatible diffs: {1}, list of diff types: [reader type: INT not compatible with writer type: STRING at /fields/1/type] Causes: reader type: INT not compatible with writer type: STRING at /fields/1/type","title":"Incompatible artifact: prices [AVRO], num of incompatible diffs: {1}, list of diff types: [reader type: INT not compatible with writer type: STRING at /fields/1/type]","status":400,"name":"RuleViolationException"}
+HTTP 400
+[?2004hapicurio-test$ curl -sS -w '\nHTTP %{http_code}\n' -H "Content-Type: application/json" --data @fixtures/prices-compatible.json "$API_URL/groups/live-rule-inh eritance-capture2/artifacts/prices/versions"
+[?2004l{"version":"3","owner":"","createdOn":"2026-10-13T08:02:32Z","artifactType":"AVRO","globalId":10,"state":"ENABLED","groupId":"live-rule-inheritance-capture2","contentId":6,"artifactId":"prices","modifiedBy":"","modifiedOn":"2026-10-13T08:02:32Z"}
+HTTP 200
+[?2004hapicurio-test$ curl -sS -w '\nHTTP %{http_code}\n' -H "Content-Type: application/json" --data @fixtures/artifact-compatibility-none.json "$API_URL/groups/liv e-rule-inheritance-capture2/artifacts/prices/rules"
+[?2004l
+HTTP 204
+[?2004hapicurio-test$ curl -sS -w '\nHTTP %{http_code}\n' -H "Content-Type: application/json" --data @fixtures/prices-incompatible.json "$API_URL/groups/live-rule-i nheritance-capture2/artifacts/prices/versions"
+[?2004l{"version":"2","owner":"","createdOn":"2026-10-13T08:02:37Z","artifactType":"AVRO","globalId":11,"state":"ENABLED","groupId":"live-rule-inheritance-capture2","contentId":7,"artifactId":"prices","modifiedBy":"","modifiedOn":"2026-10-13T08:02:37Z"}
+HTTP 200
+[?2004hapicurio-test$ 

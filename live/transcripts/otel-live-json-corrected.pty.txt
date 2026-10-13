@@ -1,0 +1,12 @@
+[?2004hapicurio-test$ [Kapicurio-test$ date -u
+[?2004lTue Oct 13 08:03:25 UTC 2026
+[?2004hapicurio-test$ podman inspect --format '{{range .Config.Env}}{{println .}}{{end}}' docs-live-json-corrected | rg 'QUARKUS_OTEL_(SDK|TRACES_ENABLED)|QUARKUS_L OG_CONSOLE_JSON'
+[?2004lQUARKUS_LOG_CONSOLE_JSON=true
+QUARKUS_OTEL_SDK_DISABLED=false
+QUARKUS_OTEL_TRACES_ENABLED=true
+[?2004hapicurio-test$ curl -sS -w '\nHTTP %{http_code}\n' http://127.0.0.1:19087/apis/registry/v3/search/artifacts
+[?2004l{"artifacts":[],"count":0}
+HTTP 200
+[?2004hapicurio-test$ podman logs --since 10s docs-live-json-corrected 2>&1 | rg '"loggerName":"io.quarkus.http.access-log"' | tail -1
+[?2004l{"timestamp":"2026-10-13T08:03:27.369920756Z","sequence":532,"loggerClassName":"org.jboss.logging.Logger","loggerName":"io.quarkus.http.access-log","level":"INFO","message":"\"apicurio-registry.access method=\"GET\" path=\"/apis/registry/v3/search/artifacts\" response_code=\"200\" response_time=\"-\" remote_ip=\"10.89.0.12\" remote_user=\"-\" user_agent=\"curl/8.18.0\"\"","threadName":"executor-thread-8","threadId":81,"mdc":{"spanId":"8f81b4a1d6cf8a93","traceId":"3cbd5bb07136c29a03e0dca6e599d818","sampled":"true"},"ndc":"","hostName":"13c3906644ac","processName":"/usr/lib/jvm/java-21-openjdk/bin/java","processId":1}
+[?2004hapicurio-test$ 
